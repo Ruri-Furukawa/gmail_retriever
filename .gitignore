@@ -1,0 +1,17 @@
+# secrets / auth
+credentials.json
+token.json
+.env
+
+# personal data
+unread_by_sender.xlsx
+unread_by_sender.csv
+mail_data/
+logs/
+
+# misc
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+~$*.xlsx
