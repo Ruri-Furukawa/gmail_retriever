@@ -12,7 +12,7 @@ Gmail APIの `gmail.readonly` スコープのみを使用します。メール�
 
 ## 仕組み
 
-1. `unread_by_sender.xlsx` の「欲しい処理」列を見て、`【就活】`または`【企業】`で始まる行のメールアドレスを対象として抽出する
+1. `mails.xlsx` の「欲しい処理」列を見て、`【就活】`または`【企業】`で始まる行のメールアドレスを対象として抽出する
 2. `fetch_target_mail.py` / `backfill_digest.py` が Gmail API(読み取り専用)で該当メールを取得し、`mail_data/` 配下に日付ごとのJSONとして保存する
 3. ローカルの Claude Code(`claude -p`)がJSONを読み、要約ルールに従って Obsidian Vault のデイリーノート・企業ノートに追記する
 
@@ -45,7 +45,7 @@ cp .env.example .env
 
 ### 4. 対象アドレス一覧(xlsx)の作成
 
-`unread_by_sender.sample.xlsx` を参考に、自分の `unread_by_sender.xlsx` を作成してください。
+`mails.sample.xlsx` を参考に、自分の `mails.xlsx` を作成してください。
 
 必須列:
 
@@ -88,4 +88,4 @@ Vault内に以下のファイル・構成が必要です(`templates/` 配下に�
 ## 安全性について
 
 - 要求スコープは `gmail.readonly` のみで、メールの変更・削除・送信は一切行いません
-- `credentials.json` / `token.json` / `.env` / `unread_by_sender.xlsx` / `mail_data/` / `logs/` は `.gitignore` 対象です。これらにはGoogleアカウントへのアクセス権や個人の受信メール内容が含まれるため、コミット・共有しないでください
+- `credentials.json` / `token.json` / `.env` / `mails.xlsx` / `mail_data/` / `logs/` は `.gitignore` 対象です。これらにはGoogleアカウントへのアクセス権や個人の受信メール内容が含まれるため、コミット・共有しないでください

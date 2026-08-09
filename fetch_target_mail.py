@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """指定アドレスからの当日分メールを抽出し、要約用JSONを出力する読み取り専用スクリプト。
 
-対象アドレスは unread_by_sender.xlsx の「欲しい処理」列を参照し、
+対象アドレスは mails.xlsx の「欲しい処理」列を参照し、
 【就活】または【企業】で始まる行のメールアドレスのみを対象とする。
 削除・既読化・変更は一切行わない(gmail.readonlyスコープのみ使用)。
 """
@@ -17,10 +17,10 @@ import openpyxl
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from fetch_unread_emails import extract_body, get_credentials, get_header
+from gmail_utils import extract_body, get_credentials, get_header
 
 BASE_DIR = Path(__file__).resolve().parent
-XLSX_PATH = BASE_DIR / "unread_by_sender.xlsx"
+XLSX_PATH = BASE_DIR / "mails.xlsx"
 MAIL_DATA_DIR = BASE_DIR / "mail_data"
 
 JST = timezone(timedelta(hours=9))
@@ -95,7 +95,7 @@ def main():
 
     targets = load_target_addresses()
     if not targets:
-        sys.exit("unread_by_sender.xlsx に【就活】/【企業】対象アドレスが見つかりません。")
+        sys.exit("mails.xlsx に【就活】/【企業】対象アドレスが見つかりません。")
 
     creds = get_credentials()
     service = build("gmail", "v1", credentials=creds)

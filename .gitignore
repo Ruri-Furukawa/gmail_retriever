@@ -4,8 +4,8 @@ token.json
 .env
 
 # personal data
-unread_by_sender.xlsx
-unread_by_sender.csv
+mails.xlsx
+mails.csv
 mail_data/
 logs/
 

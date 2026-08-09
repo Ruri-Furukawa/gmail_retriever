@@ -17,7 +17,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from fetch_target_mail import load_target_addresses
-from fetch_unread_emails import extract_body, get_credentials, get_header
+from gmail_utils import extract_body, get_credentials, get_header
 
 BASE_DIR = Path(__file__).resolve().parent
 MAIL_DATA_DIR = BASE_DIR / "mail_data"
@@ -81,7 +81,7 @@ def main():
 
     targets = load_target_addresses()
     if not targets:
-        sys.exit("unread_by_sender.xlsx に【就活】/【企業】対象アドレスが見つかりません。")
+        sys.exit("mails.xlsx に【就活】/【企業】対象アドレスが見つかりません。")
 
     creds = get_credentials()
     service = build("gmail", "v1", credentials=creds)
